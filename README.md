@@ -1,6 +1,6 @@
 # Everything Cloud Docker Starter
 
-Sample Next.js app for customer Docker hosting on Everything Cloud. The **starter app has no database** — `docker-compose.yml` still includes an **app** and **db** service as the template customers should follow. nginx, SSL, and domain routing are managed by the platform.
+Sample Next.js app for customer Docker hosting on Everything Cloud. The **starter app has no database**. nginx, SSL, and domain routing are managed by the platform.
 
 ## Quick start (local)
 
@@ -17,10 +17,9 @@ Open [http://127.0.0.1:3000](http://127.0.0.1:3000). The page shows your configu
 |----------|---------|---------|
 | `APP_URL` | Public site URL (no trailing slash) | `http://localhost:3000` |
 | `APP_PORT` | Host port for reverse proxy binding | `3000` |
-| `PORT` | Port Next.js listens on inside the container | `3000` |
-| `POSTGRES_*` | Credentials for the **db** service in compose (unused by this starter) | see `.env.example` |
+| `PORT` | Port Next.js listens on inside the container (always `3000`) | `3000` |
 
-Compose publishes the app on `127.0.0.1:${APP_PORT}` so only the managed nginx on the host can reach it.
+Compose maps host `${APP_PORT}` to container port `3000` (same pattern as other hosted apps).
 
 ## Admin: seed on aaPanel
 
@@ -36,7 +35,7 @@ Customers can later connect their own repository from the hosting portal; `.env`
 
 Do not add nginx, Caddy, Traefik, or certbot services to `docker-compose.yml`. Everything Cloud manages the reverse proxy and SSL in front of `127.0.0.1:${APP_PORT}`.
 
-When customers replace this starter with their own app, they should connect to the **db** service using `DATABASE_URL=postgresql://...@db:5432/...` and add `depends_on` with a healthcheck as shown on the starter page.
+When customers replace this starter with their own app that needs Postgres, add a **db** service to `docker-compose.yml` and connect using `DATABASE_URL=postgresql://...@db:5432/...` — see the compose snippet on the starter page.
 
 ## Development without Docker
 
