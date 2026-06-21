@@ -1,0 +1,61 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f8fafc;
+  --foreground: #020617;
+  --primary: #0369a1;
+  --primary-container: #0284c7;
+  --surface: #ffffff;
+  --surface-container: #f1f5f9;
+  --outline: #cbd5e1;
+  --muted: #475569;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-container: var(--primary-container);
+  --color-surface: var(--surface);
+  --color-surface-container: var(--surface-container);
+  --color-outline: var(--outline);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-plus-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --shadow-card: 0 1px 3px 0 rgb(15 23 42 / 0.06);
+  --shadow-card-lg: 0 4px 12px -2px rgb(15 23 42 / 0.08);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+::selection {
+  background-color: rgb(3 105 161 / 0.18);
+  color: var(--foreground);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer components {
+  .surface-panel {
+    @apply rounded-2xl border border-outline/25 bg-surface shadow-[var(--shadow-card)];
+  }
+
+  .status-pill-ok {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-emerald-500/10 px-3 py-1 text-xs font-semibold text-emerald-700;
+  }
+
+  .status-pill-warn {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-800;
+  }
+}
