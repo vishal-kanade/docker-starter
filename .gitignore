@@ -3,3 +3,14 @@ node_modules
 .env
 .env.local
 *.log
+
+# Package manager — this repo uses pnpm
+package-lock.json
+yarn.lock
+npm-shrinkwrap.json
+pnpm-debug.log*
+.pnpm-store/
+
+# Local tooling / build info
+.codegraph/
+*.tsbuildinfo
